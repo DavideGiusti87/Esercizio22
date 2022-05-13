@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /*
 Lists 02
@@ -41,26 +39,53 @@ public class Main {
         System.out.println(randomNumbers.toString());
         System.out.println(randomNumbers.size());
 
-
-       List<Integer>index = new ArrayList<>();
 /*
-        for (int i=0;i< 4;i++){
-            for (int j=0; j< divisorsOf52.size();j++){
-                if (randomNumbers.get(i).equals(divisorsOf52.get(j))){
-                    //randomNumbers.remove(i);
-                    index.add(i);
-                }
+    /----------------------RIMUOVERE DIRETTAMENTE----------------------/
+        //randomNumbers.remove(2);
+        //randomNumbers.remove(0);
+
+
+    /----------------------RIMOZIONE CON ITERATORE---------------------/
+    Obbliga alla creazione di un nuovo arrayList e lo snippet è il più lungo
+
+       List<Integer>tempList = new ArrayList<>();
+
+        for (Integer n:randomNumbers){
+            if(!tempList.contains(n)){
+                tempList.add(n);
+
             }
         }
-        index.sort(Collections.reverseOrder());
-        System.out.println(index.toString());
-        for (int i=0;i<index.size();i++){
-            randomNumbers.remove(index.get(i));
-        }
+        randomNumbers.clear();
+        randomNumbers.addAll(tempList);
+
+
+    /--------------------RIMOZIONE CON LinkedHashSet-------------------/
+    Obbliga alla creazione di un Set
+
+        Set<Integer> tempSet = new LinkedHashSet<>(randomNumbers);
+        randomNumbers.clear();
+        randomNumbers.addAll(tempSet);
+
+
+    /-----------------RIMOZIONE CON stream().distinct()----------------/
+    Obbliga alla creazione di un nuovo arrayList. Lo snippet è il più corto ma più complesso da capire
+
+        List<Integer> newList = randomNumbers.stream().distinct().collect(Collectors.toList());
+        System.out.println(newList.toString());
 */
 
-        randomNumbers.remove(2);
-        randomNumbers.remove(0);
+        List<Integer>tempList = new ArrayList<>();
+
+        for (Integer n:randomNumbers){
+            if(!tempList.contains(n)){
+                tempList.add(n);
+
+            }
+        }
+        randomNumbers.clear();
+        randomNumbers.addAll(tempList);
+
         System.out.println(randomNumbers.toString());
         Collections.sort(randomNumbers);
         System.out.println(randomNumbers.toString());
